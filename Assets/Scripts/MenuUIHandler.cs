@@ -8,6 +8,8 @@ using UnityEditor;
 
 public class MenuUIHandler : MonoBehaviour
 {
+    public string Name;
+
     public void StartGame()
     {
         SceneManager.LoadScene(1);
@@ -20,5 +22,10 @@ public class MenuUIHandler : MonoBehaviour
 #else
         Application.Quit(); 
 #endif
+    }
+
+    public void InputName(string text)
+    {
+        Name = text;
     }
 }
