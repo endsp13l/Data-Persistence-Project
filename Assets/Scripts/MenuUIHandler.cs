@@ -18,7 +18,7 @@ public class MenuUIHandler : MonoBehaviour
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
-        Application.Quit(); // original code to quit Unity player
+        Application.Quit(); 
 #endif
     }
 }
