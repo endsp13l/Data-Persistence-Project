@@ -8,7 +8,7 @@ using UnityEditor;
 
 public class MenuUIHandler : MonoBehaviour
 {
-    public string Name;
+    public static string Name;
 
     public void StartGame()
     {
