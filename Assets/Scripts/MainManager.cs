@@ -18,7 +18,7 @@ public class MainManager : MonoBehaviour
     private bool m_Started = false;
     
     private int m_Points;
-    private int m_MaxPoints;
+    private static int m_MaxPoints;
 
     private string m_Name;
           
@@ -48,6 +48,7 @@ public class MainManager : MonoBehaviour
 
         if (!m_Started)
         {
+            BestScoreText.text = $"Best Score : {m_MaxPoints} : {m_Name}";
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 m_Started = true;
@@ -64,6 +65,7 @@ public class MainManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                
             }
         }
     }
@@ -76,8 +78,12 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
-        m_MaxPoints = m_Points;
-        BestScoreText.text = $"Best Score : {m_MaxPoints} : {m_Name}";
+        if (m_Points > m_MaxPoints)
+        {
+            m_MaxPoints = m_Points;
+            NewRecord();
+        }
+
         m_GameOver = true;
         GameOverText.SetActive(true);
     }
@@ -90,8 +96,12 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    public void PlayerName()
-    { 
-        
+    public void NewRecord()
+    {
+        if (m_MaxPoints > DataManager.Instance.Score)
+        {
+            DataManager.Instance.Score = m_MaxPoints;
+            DataManager.Instance.Save();
+        }
     }
 }

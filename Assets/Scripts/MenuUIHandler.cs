@@ -7,14 +7,28 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 #endif
 
+[DefaultExecutionOrder(1000)]
+
 public class MenuUIHandler : MonoBehaviour
 {
     public InputField Name;
     public Text HighScore;
 
+    public void Start()
+    {
+        DataManager.Instance.Load();
+        int points = DataManager.Instance.Score;
+        string player = DataManager.Instance.Name;
+        HighScore.text = $"High score : {points} : {player}";
+    }
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        if (Name.text.Length > 0)
+        {
+            SceneManager.LoadScene(1);
+        }
+        else
+            return;
     }
 
     public void Exit()
@@ -29,6 +43,5 @@ public class MenuUIHandler : MonoBehaviour
     public void InputName()
     {
         DataManager.Instance.Name = Name.text;
-        Debug.Log($"input{ DataManager.Instance.Name}");
     }
 }
