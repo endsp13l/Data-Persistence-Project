@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,7 +9,8 @@ using UnityEditor;
 
 public class MenuUIHandler : MonoBehaviour
 {
-    public static string Name;
+    public InputField Name;
+    public Text HighScore;
 
     public void StartGame()
     {
@@ -24,8 +26,9 @@ public class MenuUIHandler : MonoBehaviour
 #endif
     }
 
-    public void InputName(string text)
+    public void InputName()
     {
-        Name = text;
+        DataManager.Instance.Name = Name.text;
+        Debug.Log($"input{ DataManager.Instance.Name}");
     }
 }
